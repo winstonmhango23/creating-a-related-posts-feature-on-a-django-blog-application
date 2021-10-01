@@ -1,0 +1,57 @@
+{% extends "blog/base.html" %}
+{% block title %}My Blog{% endblock %}
+
+{% block content %}
+<div class="w-full lg:w-6/12">
+<!--blog filter area-->
+    <div class="flex items-center justify-between mb-8">
+                    <h1 class="text-xl font-bold text-green-700 md:text-2xl">Posts</h1>
+
+                    <!--posts filter-->
+                    <div>
+                        <select class="w-full text-green-500 border-gray-300 p-2 rounded-md shadow-sm focus:border-green-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option class="text-green-500 ">Latest</option>
+                            <option class="text-green-500 ">Last Week</option>
+                        </select>
+                    </div>
+        </div>
+
+        {% if tag %}
+            <h2 >All posts tagged <span class="font-bold text-red-500 ">"{{ tag.name }}"</span></h2>
+        {% endif %}
+        
+        {% for post in posts %}
+        <div class="mt-2">
+            <!--post title-->
+            <a href="{{ post.get_absolute_url }}"
+              class="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-purple-500  hover:underline">{{ post.title }}
+              </a>
+              
+              <!--post tags-->
+              <div class="flex items-center justify-start mt-4 mb-4">
+                    
+                    {% for tag in post.tags.all %}
+                    <a href="{% url "blog:post_list_by_tag" tag.slug %}"class="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500 mr-4">
+                    {{ tag.name }}
+                    </a>
+                    {% if not forloop.last %} {% endif %} 
+                    {% endfor %}
+                    
+                </div>
+                <!--post date and author-->              
+                <p class="text-sm text-gray-500 font-bold ">
+                    Published {{ post.publish }} by {{ post.author }}
+                </p>
+
+              
+             <!--post body-->
+            <p class="mt-2 text-gray-500">{{ post.body|truncatewords:30|linebreaks }}</p>
+         </div>
+        {% endfor %}
+    <!--pagination using function based view-->
+    {% include "pagination.html" with page=posts %}
+    <!--pagination using class based view-->
+    
+    </div>
+
+ {% endblock %}
