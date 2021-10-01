@@ -1,2 +1,2 @@
 # creating-a-related-posts-feature-on-a-django-blog-application
- Creating a related posts feature on our Python, Django and Tailwind css blog application.
+ Creating a related posts feature on our Python, Django and Tailwind css blog application.This is a repository for part6 of our Python,Django and tailwind css tutorials series at www.codesnnippets.com. You can read the full torial for this part at <a href="https://codesnnippets.com/how-to-create-a-related-posts-feature-in-a-django-and-tailwind-css-blog-application-django-part-6/">Creating a related posts feature in a Python and Django blog application</a>
